@@ -1,0 +1,1352 @@
+/* ============================================
+   Mafia Night - Stylesheet
+   Dark Mystery Theme
+   ============================================ */
+
+:root {
+  --bg-1: #0a0010;
+  --bg-2: #150525;
+  --bg-3: #1f0a35;
+  --ink: #f0e8ff;
+  --ink-soft: #b8a8d0;
+  --muted: #6a5a80;
+  --card: #18072c;
+  --card-hover: #240b3f;
+  --border: rgba(168, 85, 247, 0.3);
+  --blood: #c2003c;
+  --blood-light: #ff2e63;
+  --moon: #fbbf24;
+  --village: #00ff88;
+  --detective: #38bdf8;
+  --doctor: #f472b6;
+  --mafia: #c2003c;
+  --gradient: linear-gradient(135deg, #2a0845, #6441a5);
+  --gradient-blood: linear-gradient(135deg, #c2003c, #8b0030);
+  --gradient-moon: linear-gradient(135deg, #fbbf24, #f59e0b);
+  --glow-purple: 0 0 30px rgba(168, 85, 247, 0.5);
+  --glow-blood: 0 0 30px rgba(194, 0, 60, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+  color: var(--ink);
+  background: var(--bg-1);
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(194, 0, 60, 0.15), transparent 40%),
+    radial-gradient(circle at 80% 100%, rgba(168, 85, 247, 0.2), transparent 40%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  transition: background 0.5s;
+}
+
+/* ============ Splash ============ */
+.mafia-splash {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #1f0a35, #0a0010);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.6s, visibility 0.6s;
+}
+.mafia-splash.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash-inner {
+  text-align: center;
+  padding: 20px;
+}
+
+.splash-moon {
+  font-size: 110px;
+  animation: moonPulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 60px rgba(251, 191, 36, 0.7));
+}
+
+@keyframes moonPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 60px rgba(251, 191, 36, 0.7)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 90px rgba(251, 191, 36, 1)); }
+}
+
+.splash-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(44px, 13vw, 78px);
+  font-weight: 900;
+  letter-spacing: 6px;
+  background: var(--gradient-blood);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 14px 0;
+  animation: bloodPulse 2s ease-in-out infinite;
+}
+
+@keyframes bloodPulse {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(194, 0, 60, 0.5)); }
+  50% { filter: drop-shadow(0 0 40px rgba(194, 0, 60, 1)); }
+}
+
+.splash-title span {
+  display: block;
+  font-size: 0.5em;
+  letter-spacing: 12px;
+  margin-top: -12px;
+  color: var(--moon);
+  background: var(--gradient-moon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.splash-tag {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+.splash-loader {
+  width: 200px;
+  height: 4px;
+  background: rgba(194, 0, 60, 0.15);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 35px auto 0;
+}
+
+.splash-loader i {
+  display: block;
+  height: 100%;
+  width: 30%;
+  background: var(--gradient-blood);
+  border-radius: 99px;
+  animation: loadSlide 1.5s ease-in-out infinite;
+}
+
+@keyframes loadSlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+/* ============ Story Screen ============ */
+.story-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #0a0010, #1f0a35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  padding: 20px;
+  overflow-y: auto;
+}
+.story-screen.active {
+  display: flex;
+}
+
+.story-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px 24px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), var(--glow-purple);
+  animation: cardIn 0.7s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-blood);
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.story-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: float 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.story-card h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  background: var(--gradient-blood);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.story-card p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.story-card p b {
+  color: var(--blood-light);
+  font-weight: 900;
+}
+
+.story-role {
+  background: rgba(194, 0, 60, 0.1);
+  border: 2px solid var(--blood);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  animation: pulseRole 2s ease-in-out infinite;
+}
+
+@keyframes pulseRole {
+  0%, 100% { box-shadow: 0 0 20px rgba(194, 0, 60, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(194, 0, 60, 0.6); }
+}
+
+.story-role-icon {
+  font-size: 44px;
+}
+
+.story-role-info {
+  text-align: right;
+  flex: 1;
+}
+
+.story-role-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.story-role-name {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--moon);
+  margin-top: 4px;
+}
+
+.btn-primary-full {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--gradient-blood);
+  color: #fff;
+  font: 800 17px 'Cairo';
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(194, 0, 60, 0.4);
+  transition: transform 0.15s, box-shadow 0.2s;
+  margin-top: 8px;
+}
+.btn-primary-full:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(194, 0, 60, 0.6);
+}
+.btn-primary-full:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary-full {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: transparent;
+  color: var(--ink);
+  font: 800 15px 'Cairo';
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.15s;
+}
+.btn-secondary-full:hover {
+  background: var(--card-hover);
+  border-color: var(--moon);
+}
+
+/* ============ App ============ */
+.mafia-app {
+  display: none;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+.mafia-app.active {
+  display: block;
+  animation: appIn 0.4s ease;
+}
+
+@keyframes appIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ Topbar ============ */
+.mafia-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.icon-btn:hover {
+  background: var(--card-hover);
+  border-color: var(--moon);
+  transform: translateY(-2px);
+}
+
+.phase-badge {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s;
+}
+
+.phase-badge.night {
+  background: linear-gradient(135deg, #1a0a2e, #2a0845);
+  border-color: var(--moon);
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.3);
+}
+
+.phase-badge.day {
+  background: linear-gradient(135deg, #2a1500, #4a2500);
+  border-color: var(--moon);
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.5);
+}
+
+.phase-icon { font-size: 22px; }
+
+/* ============ Players Info ============ */
+.players-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.pi-stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.pi-stat.mafia {
+  border-color: var(--blood);
+  background: rgba(194, 0, 60, 0.1);
+}
+
+.pi-icon {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.pi-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.pi-val {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--moon);
+  margin-top: 2px;
+}
+
+.pi-stat.mafia .pi-val {
+  color: var(--blood-light);
+}
+
+/* ============ Section Title ============ */
+.section-title {
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  padding-right: 4px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-head h3 {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.btn-mini {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 6px 12px;
+  border-radius: 9px;
+  cursor: pointer;
+  font: 700 12px 'Cairo';
+  transition: all 0.15s;
+}
+.btn-mini:hover {
+  background: var(--card-hover);
+  border-color: var(--blood);
+}
+
+/* ============ Players Grid ============ */
+.players-grid-section {
+  margin-bottom: 18px;
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.player-card {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 10px;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.player-card:hover:not(.dead):not(.disabled) {
+  transform: translateY(-4px);
+  border-color: var(--moon);
+  box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+}
+
+.player-card.dead {
+  opacity: 0.4;
+  filter: grayscale(1);
+  cursor: default;
+}
+
+.player-card.dead::after {
+  content: '💀';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  opacity: 0.9;
+}
+
+.player-card.me {
+  border-color: var(--moon);
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.4);
+}
+
+.player-card.selected {
+  border-color: var(--blood-light);
+  box-shadow: 0 0 30px rgba(255, 46, 99, 0.6);
+  transform: translateY(-4px);
+}
+
+.player-avatar {
+  font-size: 40px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.player-name {
+  font-size: 13px;
+  font-weight: 900;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-role-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 800;
+  background: rgba(168, 85, 247, 0.2);
+  color: var(--ink-soft);
+}
+
+.player-role-badge.mafia { background: var(--blood); color: #fff; }
+.player-role-badge.doctor { background: var(--doctor); color: #000; }
+.player-role-badge.detective { background: var(--detective); color: #000; }
+.player-role-badge.villager { background: rgba(0, 255, 136, 0.2); color: var(--village); }
+
+.player-vote-count {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: var(--blood);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: votePulse 1s ease-in-out infinite;
+}
+
+@keyframes votePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* ============ Action Area ============ */
+.action-area {
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 18px;
+  margin-bottom: 18px;
+  text-align: center;
+  min-height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-area::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-blood);
+}
+
+.action-title {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  background: var(--gradient-moon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.action-subtitle {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.action-btn {
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--gradient-blood);
+  color: #fff;
+  font: 800 16px 'Cairo';
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 8px 20px rgba(194, 0, 60, 0.4);
+  margin: 4px;
+}
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(194, 0, 60, 0.6);
+}
+
+.action-btn.secondary {
+  background: var(--card-hover);
+  border: 2px solid var(--border);
+  color: var(--ink);
+  box-shadow: none;
+}
+.action-btn.secondary:hover {
+  border-color: var(--moon);
+}
+
+.action-info {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px dashed var(--moon);
+  border-radius: 14px;
+  padding: 14px;
+  margin: 14px 0;
+  font-size: 14px;
+  color: var(--moon);
+  font-weight: 700;
+  animation: infoPulse 2s ease-in-out infinite;
+}
+
+@keyframes infoPulse {
+  0%, 100% { border-color: rgba(251, 191, 36, 0.5); }
+  50% { border-color: var(--moon); }
+}
+
+/* ============ Log ============ */
+.log-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.log-list {
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-list::-webkit-scrollbar { width: 6px; }
+.log-list::-webkit-scrollbar-thumb {
+  background: var(--blood);
+  border-radius: 99px;
+}
+
+.log-item {
+  background: var(--bg-2);
+  border-left: 3px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  animation: logIn 0.3s ease;
+}
+
+@keyframes logIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.log-item.night { border-left-color: var(--moon); }
+.log-item.mafia { border-left-color: var(--blood); }
+.log-item.day { border-left-color: var(--warning, #fbbf24); }
+.log-item.death { border-left-color: var(--blood-light); background: rgba(194, 0, 60, 0.1); }
+.log-item.info { border-left-color: var(--detective); }
+.log-item.system { border-left-color: var(--muted); opacity: 0.7; }
+
+.log-empty {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 20px;
+}
+
+/* ============ Quick Actions ============ */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.qa-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 8px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+  transition: all 0.15s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.qa-btn span:first-child {
+  font-size: 24px;
+}
+
+.qa-btn span:last-child {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.qa-btn:hover {
+  background: var(--card-hover);
+  border-color: var(--blood);
+  transform: translateY(-2px);
+}
+
+/* ============ Modals ============ */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 5000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.modal.active {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 22px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), var(--glow-purple);
+  animation: modalIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+@keyframes modalIn {
+  from { transform: translateY(40px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-head h2 {
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.btn-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--blood);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+.btn-close:hover {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Help */
+.help-content h3 {
+  font-size: 16px;
+  color: var(--moon);
+  margin: 16px 0 6px;
+  font-weight: 900;
+}
+
+.help-content p {
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.help-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.help-content li {
+  background: var(--bg-2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.help-content li b {
+  color: var(--moon);
+}
+
+/* Roles list */
+.role-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-2);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.role-row.dead {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.role-row-avatar {
+  font-size: 28px;
+}
+
+.role-row-info {
+  flex: 1;
+  text-align: right;
+}
+
+.role-row-name {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.role-row-role {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* Result box */
+.result-box {
+  text-align: center;
+  max-width: 420px;
+}
+
+.result-icon {
+  font-size: 80px;
+  margin-bottom: 16px;
+  animation: resultBounce 0.7s ease;
+}
+
+@keyframes resultBounce {
+  0% { transform: scale(0) rotate(-180deg); }
+  60% { transform: scale(1.3) rotate(15deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+.result-box h2 {
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 12px;
+  background: var(--gradient-moon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.result-box p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+#resultDetails {
+  background: var(--bg-2);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 20px;
+  text-align: right;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* Menu box */
+.menu-box {
+  max-width: 380px;
+}
+
+.menu-btn {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--ink);
+  font: 700 15px 'Cairo';
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-align: right;
+  transition: all 0.15s;
+}
+.menu-btn:hover {
+  background: var(--card-hover);
+  border-color: var(--blood);
+  transform: translateX(-4px);
+}
+
+/* Confirm box */
+.confirm-box {
+  text-align: center;
+  max-width: 380px;
+}
+
+.confirm-icon {
+  font-size: 60px;
+  margin-bottom: 12px;
+}
+
+.confirm-box h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.confirm-box p {
+  color: var(--ink-soft);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.confirm-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-cancel {
+  padding: 13px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink);
+  font: 800 15px 'Cairo';
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-cancel:hover {
+  background: var(--card-hover);
+}
+
+.btn-confirm {
+  padding: 13px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--gradient-blood);
+  color: #fff;
+  font: 800 15px 'Cairo';
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 6px 18px rgba(194, 0, 60, 0.4);
+}
+.btn-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(194, 0, 60, 0.6);
+}
+
+/* Event box */
+.event-box {
+  text-align: center;
+  max-width: 380px;
+}
+
+.event-icon {
+  font-size: 70px;
+  margin-bottom: 14px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.event-box h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--moon);
+}
+
+.event-box p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* ============ Toast ============ */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  background: var(--card);
+  border: 1px solid var(--moon);
+  color: var(--ink);
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 30px rgba(251, 191, 36, 0.3);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  z-index: 6000;
+  pointer-events: none;
+  max-width: 90vw;
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 520px) {
+  .mafia-app {
+    padding: 0 12px 50px;
+  }
+
+  .players-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+  }
+
+  .player-card {
+    padding: 10px 6px;
+  }
+
+  .player-avatar { font-size: 32px; }
+  .player-name { font-size: 12px; }
+
+  .players-info {
+    gap: 8px;
+  }
+
+  .pi-val { font-size: 18px; }
+  .pi-icon { font-size: 18px; }
+
+  .action-area {
+    padding: 20px 14px;
+  }
+
+  .action-title { font-size: 18px; }
+  .action-subtitle { font-size: 13px; }
+
+  .quick-actions {
+    gap: 8px;
+  }
+
+  .qa-btn {
+    padding: 12px 6px;
+  }
+
+  .qa-btn span:first-child { font-size: 20px; }
+  .qa-btn span:last-child { font-size: 11px; }
+
+  .modal-box {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .modal-head h2 { font-size: 18px; }
+
+  .story-card {
+    padding: 24px 18px;
+  }
+
+  .story-card h2 { font-size: 20px; }
+  .story-card p { font-size: 14px; }
+
+  .story-role-icon { font-size: 36px; }
+  .story-role-name { font-size: 17px; }
+}
+/* ============ شاشة التعليمات ============ */
+.tutorial-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #0a0010, #1f0a35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9500;
+  padding: 16px;
+  overflow-y: auto;
+}
+.tutorial-screen.active {
+  display: flex;
+}
+
+.tutorial-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px;
+  max-width: 560px;
+  width: 100%;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), var(--glow-purple);
+  animation: cardIn 0.7s ease;
+  position: relative;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.tutorial-card::-webkit-scrollbar {
+  width: 6px;
+}
+.tutorial-card::-webkit-scrollbar-thumb {
+  background: var(--blood);
+  border-radius: 99px;
+}
+
+.tutorial-header {
+  text-align: center;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--border);
+}
+
+.tutorial-icon {
+  font-size: 56px;
+  margin-bottom: 10px;
+  animation: float 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+.tutorial-header h2 {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  background: var(--gradient-moon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tutorial-sub {
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.tutorial-body {
+  margin-bottom: 20px;
+}
+
+.tut-section {
+  margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--border);
+}
+.tut-section:last-of-type {
+  border-bottom: none;
+}
+
+.tut-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tut-num {
+  width: 32px;
+  height: 32px;
+  background: var(--gradient-blood);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 15px;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(194, 0, 60, 0.5);
+}
+
+.tut-title h3 {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--moon);
+}
+
+.tut-section p {
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+
+.tut-section p b {
+  color: var(--blood-light);
+}
+
+.tut-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tut-list li {
+  background: var(--bg-2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.tut-list li b {
+  color: var(--moon);
+}
+
+.tut-roles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.tut-role {
+  background: var(--bg-2);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s;
+}
+.tut-role:hover {
+  transform: translateY(-3px);
+}
+
+.tut-role.villager { border-color: rgba(0, 255, 136, 0.3); }
+.tut-role.mafia { border-color: rgba(194, 0, 60, 0.5); }
+.tut-role.doctor { border-color: rgba(244, 114, 182, 0.4); }
+.tut-role.detective { border-color: rgba(56, 189, 248, 0.4); }
+
+.tr-icon {
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.tr-info {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+}
+
+.tr-info b {
+  display: block;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+
+.tr-info small {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.tut-tips {
+  background: rgba(251, 191, 36, 0.08);
+  border: 2px dashed var(--moon);
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 10px;
+}
+
+.tips-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--moon);
+  margin-bottom: 10px;
+}
+
+.tut-tips ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tut-tips li {
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 6px 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .tutorial-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .tutorial-icon { font-size: 44px; }
+  .tutorial-header h2 { font-size: 20px; }
+
+  .tut-title h3 { font-size: 14px; }
+  .tut-num { width: 26px; height: 26px; font-size: 13px; }
+
+  .tut-section p { font-size: 13px; }
+  .tut-list li { font-size: 12px; padding: 8px 12px; }
+
+  .tut-roles { grid-template-columns: 1fr; }
+  .tr-icon { font-size: 26px; }
+  .tr-info b { font-size: 13px; }
+  .tr-info small { font-size: 10px; }
+
+  .tips-title { font-size: 14px; }
+  .tut-tips li { font-size: 12px; }
+}

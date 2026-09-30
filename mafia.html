@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0e27">
+<title>🎭 Mafia - DULA Pro Max</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mafia-style.css">
+</head>
+<body>
+
+<!-- ===== شاشة البداية ===== -->
+<div id="mafiaSplash" class="mafia-splash">
+  <div class="splash-inner">
+    <div class="splash-moon">🌕</div>
+    <h1 class="splash-title">MAFIA<span>NIGHT</span></h1>
+    <p class="splash-tag">اكشف المافيا قبل ما يقتلوك</p>
+    <div class="splash-loader"><i></i></div>
+  </div>
+</div>
+<!-- ===== شاشة التعليمات ===== -->
+<div id="tutorialScreen" class="tutorial-screen">
+  <div class="tutorial-card">
+    <div class="tutorial-header">
+      <div class="tutorial-icon">📖</div>
+      <h2>إزاي بتتلعب اللعبة؟</h2>
+      <p class="tutorial-sub">اقرأ التعليمات قبل ما تبدأ</p>
+    </div>
+
+    <div class="tutorial-body">
+      <div class="tut-section">
+        <div class="tut-title">
+          <span class="tut-num">1</span>
+          <h3>🎯 الهدف من اللعبة</h3>
+        </div>
+        <p>
+          القرية فيها <b>8 أشخاص</b>، منهم <b>2 مافيا</b> مختبئين بين القرويين.
+        </p>
+        <ul class="tut-list">
+          <li>✅ <b>لو انت قروي:</b> لازم تكتشف المافيا بالتصويت وتقتلهم</li>
+          <li>✅ <b>لو انت مافيا:</b> لازم تقتل القرويين واحدة واحدة</li>
+        </ul>
+      </div>
+
+      <div class="tut-section">
+        <div class="tut-title">
+          <span class="tut-num">2</span>
+          <h3>🌙 مرحلة الليل</h3>
+        </div>
+        <p>
+          كل ليلة، القرية كلها بتنام، لكن <b>المافيا بتتحرك في الظلام</b>:
+        </p>
+        <ul class="tut-list">
+          <li>🎭 <b>المافيا:</b> تختار شخص تقتله</li>
+          <li>💊 <b>الطبيب:</b> يختار شخص يحميه من الموت</li>
+          <li>🔍 <b>المحقق:</b> يختار شخص يعرف هويته الحقيقية</li>
+          <li>👨‍🌾 <b>القروي:</b> بينام وبيستنى الصبح</li>
+        </ul>
+      </div>
+
+      <div class="tut-section">
+        <div class="tut-title">
+          <span class="tut-num">3</span>
+          <h3>☀️ مرحلة النهار</h3>
+        </div>
+        <p>
+          أول ما يصحى الصباح، بتعرفوا <b>مين مات</b> بالليل، وبعدها:
+        </p>
+        <ul class="tut-list">
+          <li>💬 <b>المناقشة:</b> كل واحد يقول شكوكه</li>
+          <li>🗳️ <b>التصويت:</b> الكل يصوت على شخص واحد يقتلوه</li>
+          <li>⚖️ <b>الإعدام:</b> الشخص اللي أخد أغلب الأصوات بيتقتل</li>
+        </ul>
+      </div>
+
+      <div class="tut-section">
+        <div class="tut-title">
+          <span class="tut-num">4</span>
+          <h3>🎭 الأدوار في اللعبة</h3>
+        </div>
+        <div class="tut-roles">
+          <div class="tut-role villager">
+            <span class="tr-icon">👨‍🌾</span>
+            <div class="tr-info">
+              <b>قروي</b>
+              <small>مش عنده قدرة، بس بيصوت</small>
+            </div>
+          </div>
+          <div class="tut-role mafia">
+            <span class="tr-icon">🎭</span>
+            <div class="tr-info">
+              <b>مافيا</b>
+              <small>بيقتل في الليل</small>
+            </div>
+          </div>
+          <div class="tut-role doctor">
+            <span class="tr-icon">💊</span>
+            <div class="tr-info">
+              <b>طبيب</b>
+              <small>بيحمي شخص كل ليلة</small>
+            </div>
+          </div>
+          <div class="tut-role detective">
+            <span class="tr-icon">🔍</span>
+            <div class="tr-info">
+              <b>محقق</b>
+              <small>بيكتشف هوية شخص</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tut-section">
+        <div class="tut-title">
+          <span class="tut-num">5</span>
+          <h3>🏆 إمتى بتكسب؟</h3>
+        </div>
+        <ul class="tut-list">
+          <li>👨‍🌾 <b>القرويين يكسبوا:</b> لو قتلوا كل المافيا</li>
+          <li>🎭 <b>المافيا تكسب:</b> لو عددهم بيساوي القرويين</li>
+        </ul>
+      </div>
+
+      <div class="tut-tips">
+        <div class="tips-title">💡 نصايح مهمة</div>
+        <ul>
+          <li>👀 راقب سلوك اللاعبين في التصويت</li>
+          <li>🤔 متصدقش أي كلام بسرعة — المافيا بتحاول تخدعك</li>
+          <li>🎯 لو انت محقق، استخدم معلوماتك بذكاء</li>
+          <li>💊 لو انت طبيب، احمِ نفسك أو الأشخاص المهمين</li>
+        </ul>
+      </div>
+    </div>
+
+    <button id="startAfterTutorialBtn" class="btn-primary-full">
+      ✅ تمام، فهمت — يلا نبدأ!
+    </button>
+  </div>
+</div>
+<!-- ===== شاشة البداية (قصة) ===== -->
+<div id="storyScreen" class="story-screen">
+  <div class="story-card">
+    <div class="story-icon">📜</div>
+    <h2>مرحباً بك في قرية DULA</h2>
+    <p>قرية هادئة سكانها 8 أشخاص. لكن بالأمس القريب، <b>تسللت 2 من عائلة المافيا</b> إلى القرية.</p>
+    <p>المهمة: اكتشفهم <b>قبل ما يقتلوك انت وباقي القرويين</b>.</p>
+    <div class="story-role">
+      <div class="story-role-icon">🎭</div>
+      <div class="story-role-info">
+        <div class="story-role-label">دورك:</div>
+        <div class="story-role-name" id="roleDisplay">جاري التوزيع...</div>
+      </div>
+    </div>
+    <button id="startGameBtn" class="btn-primary-full">🚀 ابدأ اللعبة</button>
+  </div>
+</div>
+
+<!-- ===== التطبيق ===== -->
+<div id="mafiaApp" class="mafia-app">
+
+  <!-- شريط علوي -->
+  <header class="mafia-topbar">
+    <button class="icon-btn" onclick="showHelp()">❓</button>
+    <div class="phase-badge" id="phaseBadge">
+      <span class="phase-icon">🌙</span>
+      <span class="phase-text" id="phaseText">الليلة الأولى</span>
+    </div>
+    <button class="icon-btn" onclick="showRoles()">👥</button>
+  </header>
+
+  <!-- معلومات اللاعبين -->
+  <section class="players-info">
+    <div class="pi-stat">
+      <div class="pi-icon">👥</div>
+      <div class="pi-label">أحياء</div>
+      <div class="pi-val" id="aliveCount">8</div>
+    </div>
+    <div class="pi-stat">
+      <div class="pi-icon">💀</div>
+      <div class="pi-label">موتى</div>
+      <div class="pi-val" id="deadCount">0</div>
+    </div>
+    <div class="pi-stat mafia">
+      <div class="pi-icon">🎭</div>
+      <div class="pi-label">مافيا</div>
+      <div class="pi-val" id="mafiaCount">?</div>
+    </div>
+  </section>
+
+  <!-- اللاعبين -->
+  <section class="players-grid-section">
+    <h3 class="section-title">🎭 اللاعبين</h3>
+    <div class="players-grid" id="playersGrid"></div>
+  </section>
+
+  <!-- منطقة اللعب -->
+  <section class="action-area" id="actionArea">
+    <!-- بتتغير حسب المرحلة -->
+  </section>
+
+  <!-- سجل الأحداث -->
+  <section class="log-section">
+    <div class="section-head">
+      <h3>📜 سجل الأحداث</h3>
+      <button class="btn-mini" onclick="clearLog()">🗑️</button>
+    </div>
+    <div class="log-list" id="logList"></div>
+  </section>
+
+  <!-- أزرار سريعة -->
+  <section class="quick-actions">
+    <button class="qa-btn" onclick="showHelp()">
+      <span>❓</span>
+      <span>مساعدة</span>
+    </button>
+    <button class="qa-btn" onclick="showRoles()">
+      <span>👥</span>
+      <span>الأدوار</span>
+    </button>
+    <button class="qa-btn" onclick="restartGame()">
+      <span>🔄</span>
+      <span>إعادة</span>
+    </button>
+  </section>
+
+</div>
+
+<!-- ===== نافذة المساعدة ===== -->
+<div id="helpModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>❓ المساعدة</h2>
+      <button class="btn-close" onclick="closeHelp()">✕</button>
+    </div>
+    <div class="help-content">
+      <h3>🎯 الهدف</h3>
+      <p>القرويين لازم يكتشفوا المافيا قبل ما يقتلوهم. المافيا لازم تقتل القرويين.</p>
+
+      <h3>🌙 الليل</h3>
+      <p>المافيا تختار شخص تقتله. الطبيب يحمي شخص. المحقق يحقق في شخص.</p>
+
+      <h3>☀️ النهار</h3>
+      <p>الكل يصوّت على شخص يتقتل. لو الأغلبية اختارت شخص، يتقتل.</p>
+
+      <h3>🎭 الأدوار</h3>
+      <ul>
+        <li>👨‍🌾 <b>قروي:</b> مش عنده قدرة خاصة</li>
+        <li>🎭 <b>مافيا:</b> يقتل في الليل</li>
+        <li>💊 <b>طبيب:</b> يحمي شخص كل ليلة</li>
+        <li>🔍 <b>محقق:</b> يعرف هوية شخص كل ليلة</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== نافذة الأدوار ===== -->
+<div id="rolesModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>👥 اللاعبين</h2>
+      <button class="btn-close" onclick="closeRoles()">✕</button>
+    </div>
+    <div id="rolesList"></div>
+  </div>
+</div>
+
+<!-- ===== نافذة النتيجة ===== -->
+<div id="resultModal" class="modal">
+  <div class="modal-box result-box">
+    <div class="result-icon" id="resultIcon">🏆</div>
+    <h2 id="resultTitle">الفائزون!</h2>
+    <p id="resultText"></p>
+    <div id="resultDetails"></div>
+    <button class="btn-primary-full" onclick="restartGame()">🔄 العب تاني</button>
+    <button class="btn-secondary-full" onclick="backToMenu()">🏠 الرئيسية</button>
+  </div>
+</div>
+
+<!-- ===== Toast ===== -->
+<div id="toast" class="toast"></div>
+
+<script src="mafia-script.js"></script>
+</body>
+</html>
